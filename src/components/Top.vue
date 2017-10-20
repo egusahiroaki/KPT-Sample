@@ -7,7 +7,7 @@
       <div v-for='item in elm.items' class="text row">
         <div class="content" @mouseover='mouseOver($event)' @mouseleave='mouseLeave($event)'>
           <div class="item">{{item.title}}{{item.name}}</div>
-          <el-button class="delete" type="primary" icon="delete" size="mini" @click="deleteItem(elm, item)"></el-button>
+          <el-button class="delete" type="primary" icon="close" size="mini" @click="deleteItem(elm, item)"></el-button>
         </div>
       </div>
     </el-card>
