@@ -53,7 +53,7 @@ export default {
       // })
     },
     addForm () {
-      this.items.push({type: '', title: ''}, {type: '', title: ''})
+      this.items.push({type: '', title: ''})
     },
     deleteItem (num) {
       this.items.splice(num, 1)
