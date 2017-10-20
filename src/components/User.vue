@@ -22,8 +22,9 @@
             </el-form>
 
             <div hogehoge v-if="index === items.length - 1" @click="addForm">
-              <div style="width: 40%; height:140px; display:inline-block; color: #e2e2e2; font-size:100px;">
-                + 
+              <div style="width: 40%; height:140px; display:inline-block; color: #e2e2e2;">
+                <el-button class="delete" icon="plus" @click="deleteItem(index)"></el-button>
+
               </div>
             </div>
           </el-card>
