@@ -1,12 +1,16 @@
 <template>
   <div>
-    <ul v-for='elm in allItems'>
-      <h2>{{elm.title}}</h2>
-      <li v-for='item in elm.items'>
+    <el-card class="box-card" v-for='elm in allItems'>
+      <div slot="header" class="clearfix">
+        <h2 style="line-height: 16px;">{{elm.title}}</h2>
+      </div>
+      <div v-for='item in elm.items' :key="o" class="text item">
         {{item.title}}
         {{item.name}}
-      </li>
-    </ul>
+      </div>
+    </el-card>
+
+
   </div>
 </template>
 
@@ -27,4 +31,23 @@ export default {
 }
 </script>
 <style scoped>
+  .text {
+    font-size: 14px;
+  }
+  .item {
+    padding: 18px 0;
+  }
+  .clearfix:before,
+  .clearfix:after {
+      display: table;
+      content: "";
+  }
+  .clearfix:after {
+      clear: both
+  }
+
+  .box-card {
+    margin: 20px auto;
+    width: 60%;
+  }
 </style>
