@@ -1,8 +1,10 @@
 <template>
   <div>
-    <ul>
-      <li v-for='item in allItems'>
-        {{item.id}}: {{item.title}}
+    <ul v-for='elm in allItems'>
+      <h2>{{elm.title}}</h2>
+      <li v-for='item in elm.items'>
+        {{item.title}}
+        {{item.name}}
       </li>
     </ul>
   </div>
@@ -18,7 +20,7 @@ export default {
     }
   },
   computed: mapGetters({
-    allItems: 'getAll'
+    allItems: 'getDashboard'
   }),
   method: {
   }
