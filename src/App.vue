@@ -2,7 +2,10 @@
   <div id="app">
     <h1>KPT Sample</h1>
     <dashboard></dashboard>
+    Copyright (c) 2017 Hiroaki Egusa
+    Released under the MIT license
   </div>
+
 </template>
 
 <script>
