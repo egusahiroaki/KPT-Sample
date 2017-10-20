@@ -61,6 +61,9 @@ export default {
     },
     addForm () {
       this.items.push({type: '', title: ''})
+      if (this.items.length === 1) {
+        this.items = [{type: '', title: ''}, {type: '', title: ''}]
+      }
     },
     deleteItem (num) {
       this.items.splice(num, 1)
