@@ -4,9 +4,9 @@
       <div slot="header" class="clearfix">
         <h2 style="line-height: 16px;">{{elm.title}}</h2>
       </div>
-      <div v-for='item in elm.items' class="text item">
+      <div v-for='item in elm.items' class="text row">
         <div class="content" @mouseover='mouseOver($event)' @mouseleave='mouseLeave($event)'>
-          {{item.title}}{{item.name}}
+          <div class="item">{{item.title}}{{item.name}}</div>
           <el-button class="delete" type="primary" icon="delete" size="mini" @click="deleteItem(elm, item)"></el-button>
         </div>
       </div>
@@ -30,7 +30,7 @@ export default {
     mouseOver (event) {
       const deleteObj = event.currentTarget.lastElementChild
       if (deleteObj.style !== null) {
-        deleteObj.style.display = 'inline'
+        deleteObj.style.display = 'inline-block'
       }
     },
     mouseLeave (event) {
@@ -49,13 +49,16 @@ export default {
   .text {
     font-size: 14px;
   }
-  .item {
-
-    padding: 18px 0;
+  .row {
+    margin: 18px 0;
     cursor: pointer;
+    text-align: left;
   }
   .content {
     width: 100%;
+  }
+  .item {
+    display: inline-block;
   }
   .clearfix:before,
   .clearfix:after {
@@ -72,5 +75,6 @@ export default {
   }
   .delete {
     display: none;
+    float: right;
   }
 </style>
