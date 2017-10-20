@@ -1,29 +1,16 @@
 <template>
   <div id="app">
-    <el-tabs type="card" @tab-click="">
-      <el-tab-pane label="Top">
-        <top></top>
-      </el-tab-pane>
-      <el-tab-pane label="User">
-        <user></user>
-      </el-tab-pane>
-      <el-tab-pane label="Markdown">
-      <markdown></markdown>
-      </el-tab-pane>
-    </el-tabs>
+    <dashboard></dashboard>
   </div>
 </template>
 
 <script>
-import Top from './components/Top.vue'
-import User from './components/User.vue'
-import Markdown from './components/Markdown.vue'
+import Dashboard from './components/Dashboard.vue'
+
 export default {
   name: 'app',
   components: {
-    Top,
-    User,
-    Markdown
+    Dashboard
   }
 }
 </script>

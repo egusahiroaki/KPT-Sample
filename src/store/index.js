@@ -30,10 +30,22 @@ const state = {
   ]
 }
 
+const ADD_ITEM = 'ADD_ITEM'
+
 const actions = {
+  add: ({ commit }, { item }) => {
+    commit(ADD_ITEM, { item })
+  }
 }
 
 const mutations = {
+  [ADD_ITEM] (state, { item }) {
+    state.dashboard.map(elm => {
+      if (elm.title === item.target) {
+        elm.items.push({title: item.content, name: 'test user'})
+      }
+    })
+  }
 }
 
 const getters = {

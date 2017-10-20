@@ -1,6 +1,23 @@
 <template>
-  <div>
-    user
+  <div style='width:300px;'>
+    <el-form :model="form" label-width="120px">
+
+      <el-form-item label="Type">
+        <el-select v-model="form.target" placeholder="Select">
+          <el-option label="KEEP" value="KEEP"></el-option>
+          <el-option label="PROBLEM" value="PROBLEM"></el-option>
+        </el-select>
+      </el-form-item>
+
+      <el-form-item label="Idea">
+        <el-input v-model="form.content"></el-input>
+      </el-form-item>
+
+      <el-form-item>
+        <el-button @click="onSubmit">Primary Button</el-button>
+      </el-form-item>
+    </el-form>
+
   </div>
 </template>
 
@@ -9,13 +26,21 @@ export default {
   name: 'User',
   data () {
     return {
-      activeName: 'first',
-      msg: 'Welcome to Your Vue.js App'
+      form: {
+        target: '',
+        content: ''
+      }
     }
   },
-  method: {
-    handleClick (tab, event) {
-      console.log(tab, event)
+  methods: {
+    onSubmit () {
+      // this.$nextTick(() => {
+      this.$store.dispatch('add', {
+        item: this.form
+      })
+      this.form.target = ''
+      this.form.content = ''
+      // })
     }
   }
 }

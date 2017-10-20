@@ -4,13 +4,11 @@
       <div slot="header" class="clearfix">
         <h2 style="line-height: 16px;">{{elm.title}}</h2>
       </div>
-      <div v-for='item in elm.items' :key="o" class="text item">
+      <div v-for='item in elm.items' class="text item">
         {{item.title}}
         {{item.name}}
       </div>
     </el-card>
-
-
   </div>
 </template>
 
@@ -25,9 +23,7 @@ export default {
   },
   computed: mapGetters({
     allItems: 'getDashboard'
-  }),
-  method: {
-  }
+  })
 }
 </script>
 <style scoped>
