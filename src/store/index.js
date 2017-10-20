@@ -31,10 +31,14 @@ const state = {
 }
 
 const ADD_ITEM = 'ADD_ITEM'
+const DELETE_ITEM = 'DELETE_ITEM'
 
 const actions = {
   add: ({ commit }, { item }) => {
     commit(ADD_ITEM, { item })
+  },
+  delete: ({ commit }, { label, item }) => {
+    commit(DELETE_ITEM, { label, item })
   }
 }
 
@@ -45,6 +49,16 @@ const mutations = {
         elm.items.push({title: item.content, name: 'test user'})
       }
     })
+  },
+  [DELETE_ITEM] (state, { label, item }) {
+    let i, j
+    state.dashboard.forEach((elm, index) => {
+      if (elm.title === label.title) {
+        i = index
+        j = elm.items.findIndex(e => e.title === item.title)
+      }
+    })
+    state.dashboard[i].items.splice(j, 1)
   }
 }
 

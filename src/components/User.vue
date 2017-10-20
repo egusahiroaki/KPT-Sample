@@ -6,6 +6,7 @@
         <el-select v-model="form.target" placeholder="Select">
           <el-option label="KEEP" value="KEEP"></el-option>
           <el-option label="PROBLEM" value="PROBLEM"></el-option>
+          <el-option label="TRY" value="TRY"></el-option>
         </el-select>
       </el-form-item>
 

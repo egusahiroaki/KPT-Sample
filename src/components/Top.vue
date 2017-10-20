@@ -7,6 +7,7 @@
       <div v-for='item in elm.items' class="text item">
         {{item.title}}
         {{item.name}}
+        <el-button type="primary" icon="delete" size="mini" @click="deleteItem(elm, item)"></el-button>
       </div>
     </el-card>
   </div>
@@ -23,7 +24,12 @@ export default {
   },
   computed: mapGetters({
     allItems: 'getDashboard'
-  })
+  }),
+  methods: {
+    deleteItem (label, item) {
+      this.$store.dispatch('delete', { label, item })
+    }
+  }
 }
 </script>
 <style scoped>
