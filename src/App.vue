@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1>KPT Sample</h1>
     <dashboard></dashboard>
   </div>
 </template>
