@@ -14,26 +14,13 @@ const state = {
 }
 
 const actions = {
-  done ({ state, commit }) {
-    // state.routeでアクセス可能
-    console.log('actions:', state.route.params.id)
-    commit('done')
-  }
 }
 
 const mutations = {
-  done (state) {
-    // state.routeでアクセス可能
-    console.log('mutations:', state.route.params.id)
-  }
 }
 
 const getters = {
-  list: state => state.list,
-  detail: state => {
-    // state.routeでアクセス可能
-    return state.list.find(l => l.id.toString() === state.route.params.id.toString()) || {}
-  }
+  getAll: state => state.list
 }
 
 export default new Vuex.Store({
