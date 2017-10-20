@@ -30,12 +30,12 @@ const state = {
   ]
 }
 
-const ADD_ITEM = 'ADD_ITEM'
+const ADD_ITEMS = 'ADD_ITEMS'
 const DELETE_ITEM = 'DELETE_ITEM'
 
 const actions = {
-  add: ({ commit }, { item }) => {
-    commit(ADD_ITEM, { item })
+  add: ({ commit }, { items }) => {
+    commit(ADD_ITEMS, { items })
   },
   delete: ({ commit }, { label, item }) => {
     commit(DELETE_ITEM, { label, item })
@@ -43,11 +43,13 @@ const actions = {
 }
 
 const mutations = {
-  [ADD_ITEM] (state, { item }) {
-    state.dashboard.map(elm => {
-      if (elm.title === item.target) {
-        elm.items.push({title: item.content, name: 'test user'})
-      }
+  [ADD_ITEMS] (state, { items }) {
+    items.forEach((item) => {
+      state.dashboard.map(elm => {
+        if (elm.title === item.type) {
+          elm.items.push({title: item.title, name: 'test user'})
+        }
+      })
     })
   },
   [DELETE_ITEM] (state, { label, item }) {
