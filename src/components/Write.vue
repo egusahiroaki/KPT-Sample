@@ -8,7 +8,7 @@
             <el-form v-if="index < items.length - 1" :model="elm" label-width="60px">
               <el-form-item label="Member">
                 <el-select v-model="elm.name" placeholder="Select">
-                  <el-option v-for="member in people" :label="member" :value="member"></el-option>
+                  <el-option v-for="member in people" :label="member.name" :value="member.name"></el-option>
                 </el-select>
               </el-form-item>
 

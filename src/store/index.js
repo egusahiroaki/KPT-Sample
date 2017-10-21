@@ -5,7 +5,10 @@ Vue.use(Vuex)
 
 const state = {
   username: 'test user',
-  members: ['test userA', 'test userB'],
+  members: [
+    {id: 1, name: 'test userA'},
+    {id: 2, name: 'test userB'}
+  ],
   dashboard: [
     {
       title: 'KEEP',
@@ -57,10 +60,8 @@ const actions = {
 const mutations = {
   [ADD_ITEMS] (state, { items }) {
     items.forEach((item) => {
-      console.log(item)
       state.dashboard.map(elm => {
         if (elm.title === item.type) {
-          console.log(item.name)
           elm.items.push({title: item.title, name: item.name})
         }
       })
@@ -82,7 +83,8 @@ const getters = {
   getDashboard: state => state.dashboard,
   getAllPeople: state => {
     let all = []
-    all.push(state.username)
+    // me is id = 0
+    all.push({id: 0, name: state.username})
     state.members.forEach((elm) => all.push(elm))
     return all
   }

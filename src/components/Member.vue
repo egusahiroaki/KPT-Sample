@@ -1,6 +1,6 @@
 <template>
   <div>
-      <ul v-for='(elm, index) in members'>
+      <ul v-for='(elm, index) in allMembers'>
         <li>
           <div v-if="!elm.edit" class="display" v-text="elm.name" @click="elm.edit = true"></div>
           <input v-if="elm.edit" type="text" v-model="elm.name" ref="textInput" @keyup.enter="submit(elm)" />
@@ -8,24 +8,25 @@
       </ul>
 
     <div>
-      <el-button @click="onSubmit">Primary Button</el-button>
+      <el-button>Primary Button</el-button>
     </div>
 
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Member',
   data () {
     return {
-      members: [
-        {name: 'test user', edit: false},
-        {name: 'test userA', edit: false},
-        {name: 'test userB', edit: false}
-      ]
+      members: [] // {id: 0, name: 'test user', edit: false},
     }
   },
+  computed: mapGetters({
+    allMembers: 'getAllPeople'
+  }),
   methods: {
     submit (member) {
       member.edit = !member.edit
