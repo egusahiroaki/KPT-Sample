@@ -27,9 +27,9 @@
               <el-button class="delete" type="primary" icon="circle-cross" size="mini" @click="deleteItem(index)"></el-button>
             </el-form>
 
-            <div hogehoge v-if="index === items.length - 1" @click="addForm">
+            <div v-if="index === items.length - 1">
               <div style="width: 40%; height:200px; display:inline-block; color: #e2e2e2;">
-                <el-button class="delete" icon="plus" @click="deleteItem(index)"></el-button>
+                <el-button class="delete" icon="plus" @click="addForm"></el-button>
 
               </div>
             </div>
@@ -71,7 +71,8 @@ export default {
       // })
     },
     addForm () {
-      this.items.push({type: '', title: ''})
+      this.items.push({name: '', type: '', title: ''})
+
       if (this.items.length === 1) {
         this.items = [{name: '', type: '', title: ''}, {name: '', type: '', title: ''}]
       }
