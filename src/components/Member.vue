@@ -2,7 +2,8 @@
   <div>
       <ul v-for='(elm, index) in members'>
         <li>
-          {{elm}}
+          <div v-if="!elm.edit" class="display" v-text="elm.name" @click="elm.edit = true"></div>
+          <input v-if="elm.edit" type="text" v-model="elm.name" ref="textInput" @keyup.enter="submit(elm)" />
         </li>
       </ul>
 
@@ -18,10 +19,17 @@ export default {
   name: 'Member',
   data () {
     return {
-      members: ['test user', 'test userA', 'test userB']
+      members: [
+        {name: 'test user', edit: false},
+        {name: 'test userA', edit: false},
+        {name: 'test userB', edit: false}
+      ]
     }
   },
   methods: {
+    submit (member) {
+      member.edit = !member.edit
+    }
   }
 }
 </script>
