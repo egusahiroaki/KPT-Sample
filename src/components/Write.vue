@@ -6,6 +6,12 @@
         <el-col :span="12">
           <el-card class="box-card">
             <el-form v-if="index < items.length - 1" :model="elm" label-width="60px">
+              <el-form-item label="Member">
+                <el-select v-model="elm.name" placeholder="Select">
+                  <el-option v-for="member in people" :label="member" :value="member"></el-option>
+                </el-select>
+              </el-form-item>
+
               <el-form-item label="Type">
                 <el-select v-model="elm.type" placeholder="Select">
                   <el-option label="KEEP" value="KEEP"></el-option>
@@ -40,29 +46,34 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'User',
+  name: 'Write',
   data () {
     return {
       items: [
-        {type: '', title: ''},
-        {type: '', title: ''}
+        {name: '', type: '', title: ''},
+        {name: '', type: '', title: ''}
       ]
     }
   },
+  computed: mapGetters({
+    people: 'getAllPeople'
+  }),
   methods: {
     onSubmit () {
       // this.$nextTick(() => {
       this.$store.dispatch('add', {
         items: this.items
       })
-      this.items = [{type: '', title: ''}, {type: '', title: ''}]
+      this.items = [{name: '', type: '', title: ''}, {name: '', type: '', title: ''}]
       // })
     },
     addForm () {
       this.items.push({type: '', title: ''})
       if (this.items.length === 1) {
-        this.items = [{type: '', title: ''}, {type: '', title: ''}]
+        this.items = [{name: '', type: '', title: ''}, {name: '', type: '', title: ''}]
       }
     },
     deleteItem (num) {

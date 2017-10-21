@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 const state = {
   username: 'test user',
+  members: ['test userA', 'test userB'],
   dashboard: [
     {
       title: 'KEEP',
@@ -30,6 +31,9 @@ const state = {
   ]
 }
 
+const ADD_MEMBERS = 'ADD_MEMBERS'
+const DELETE_MEMBER = 'DELETE_MEMBER'
+
 const ADD_ITEMS = 'ADD_ITEMS'
 const DELETE_ITEM = 'DELETE_ITEM'
 
@@ -39,15 +43,25 @@ const actions = {
   },
   delete: ({ commit }, { label, item }) => {
     commit(DELETE_ITEM, { label, item })
+  },
+
+  addMembers: ({ commit }, { members }) => {
+    commit(ADD_MEMBERS, { members })
+  },
+
+  deleteMember: ({ commit }, { member }) => {
+    commit(DELETE_MEMBER, { member })
   }
 }
 
 const mutations = {
   [ADD_ITEMS] (state, { items }) {
     items.forEach((item) => {
+      console.log(item)
       state.dashboard.map(elm => {
         if (elm.title === item.type) {
-          elm.items.push({title: item.title, name: 'test user'})
+          console.log(item.name)
+          elm.items.push({title: item.title, name: item.name})
         }
       })
     })
@@ -65,7 +79,13 @@ const mutations = {
 }
 
 const getters = {
-  getDashboard: state => state.dashboard
+  getDashboard: state => state.dashboard,
+  getAllPeople: state => {
+    let all = []
+    all.push(state.username)
+    state.members.forEach((elm) => all.push(elm))
+    return all
+  }
 }
 
 export default new Vuex.Store({
