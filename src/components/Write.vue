@@ -28,7 +28,7 @@
             </el-form>
 
             <div hogehoge v-if="index === items.length - 1" @click="addForm">
-              <div style="width: 40%; height:140px; display:inline-block; color: #e2e2e2;">
+              <div style="width: 40%; height:200px; display:inline-block; color: #e2e2e2;">
                 <el-button class="delete" icon="plus" @click="deleteItem(index)"></el-button>
 
               </div>
@@ -39,7 +39,7 @@
 
     </el-row>
     <div>
-      <el-button @click="onSubmit">Primary Button</el-button>
+      <el-button @click="onSubmit">Submit</el-button>
     </div>
 
   </div>
