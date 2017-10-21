@@ -1,6 +1,8 @@
 <template>
   <div>
-    {{allItems}}
+    {{generateMembers()}}
+    <br>
+    {{generateMarkdown()}}
   </div>
 </template>
 
@@ -14,8 +16,17 @@ export default {
     }
   },
   computed: mapGetters({
+    allPeople: 'getAllPeople',
     allItems: 'getDashboard'
-  })
+  }),
+  methods: {
+    generateMarkdown () {
+      return this.allItems
+    },
+    generateMembers () {
+      return this.allPeople
+    }
+  }
 }
 </script>
 <style scoped>
