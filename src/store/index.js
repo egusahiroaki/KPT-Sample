@@ -13,22 +13,22 @@ const state = {
     {
       title: 'KEEP',
       items: [
-        {title: 'keep1', name: 'test user', createdAt: ''},
-        {title: 'keep2', name: 'test user', createdAt: ''}
+        {title: 'keep1', userId: 0, createdAt: ''},
+        {title: 'keep2', userId: 1, createdAt: ''}
       ]
     },
     {
       title: 'PROBLEM',
       items: [
-        {title: 'problem1', name: 'test user', createdAt: ''},
-        {title: 'problem2', name: 'test user', createdAt: ''}
+        {title: 'problem1', userId: 1, createdAt: ''},
+        {title: 'problem2', userId: 2, createdAt: ''}
       ]
     },
     {
       title: 'TRY',
       items: [
-        {title: 'try1', name: 'test user', createdAt: ''},
-        {title: 'try2', name: 'test user', createdAt: ''}
+        {title: 'try1', userId: 1, createdAt: ''},
+        {title: 'try2', userId: 0, createdAt: ''}
       ]
     }
   ]
@@ -63,7 +63,7 @@ const mutations = {
     items.forEach((item) => {
       state.dashboard.map(elm => {
         if (elm.title === item.type) {
-          elm.items.push({title: item.title, name: item.name})
+          elm.items.push({title: item.title, user: item.id})
         }
       })
     })
@@ -94,7 +94,46 @@ const mutations = {
 }
 
 const getters = {
-  getDashboard: state => state.dashboard,
+  getDashboard: state => {
+    const keepBoardItems = state.dashboard[0].items.map((item) => {
+      if (item.userId === 0) {
+        item.user = state.user
+      }
+
+      if (item.userId !== 0) {
+        item.user = state.members.find(member => item.userId === member.id)
+      }
+      return item
+    })
+
+    const problemBoardItems = state.dashboard[1].items.map((item) => {
+      if (item.userId === 0) {
+        item.user = state.user
+      }
+
+      if (item.userId !== 0) {
+        item.user = state.members.find(member => item.userId === member.id)
+      }
+      return item
+    })
+
+    const tryBoardItems = state.dashboard[2].items.map((item) => {
+      if (item.userId === 0) {
+        item.user = state.user
+      }
+
+      if (item.userId !== 0) {
+        item.user = state.members.find(member => item.userId === member.id)
+      }
+      return item
+    })
+
+    let dashboardReplacedByUser = []
+    dashboardReplacedByUser.push({title: 'KEEP', items: keepBoardItems})
+    dashboardReplacedByUser.push({title: 'PROBLEM', items: problemBoardItems})
+    dashboardReplacedByUser.push({title: 'TRY', items: tryBoardItems})
+    return dashboardReplacedByUser
+  },
   getAllPeople: state => {
     let all = []
     all.push(state.user)
