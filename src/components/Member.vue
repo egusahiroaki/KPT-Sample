@@ -3,8 +3,12 @@
       <ul v-for='(elm, index) in people'>
         <li>
           <div v-if="!elm.edit" class="display" v-text="elm.name" @click="elm.edit = true"></div>
-          <input  v-if="elm.edit" type="text" v-model="elm.name" @keyup.enter="submit(elm)" v-on:blur="elm.edit = false" ref="textInput" v-focus />
+          <input  v-if="elm.edit" type="text" v-model="elm.name" @keyup.enter="submit(elm)" v-on:blur="elm.edit = false; isButtonDisabled = false" ref="textInput" v-focus @input='isButtonDisabled = true'/>
         </li>
+        <li v-if="index === people.length - 1">
+          <el-button :disabled="isButtonDisabled" size="mini" class="delete" icon="plus" @click="addMemberForm"></el-button>
+        </li>
+
       </ul>
 
   </div>
@@ -26,7 +30,7 @@ export default {
   name: 'Member',
   data () {
     return {
-      members: [] // {id: 0, name: 'test user', edit: false},
+      isButtonDisabled: false
     }
   },
   computed: mapGetters({
@@ -38,6 +42,9 @@ export default {
       this.$store.dispatch('addMember', {
         member: member
       })
+    },
+    addMemberForm () {
+      this.people.push({id: 100, name: '', edit: true})
     }
   },
   directives: {
