@@ -59,7 +59,6 @@ const actions = {
 }
 
 const mutations = {
-  // items [{user: '', type: '', title: ''}, {user: '', type: '', title: ''}]
   [ADD_ITEMS] (state, { items }) {
     items.forEach((item) => {
       console.log(item)
