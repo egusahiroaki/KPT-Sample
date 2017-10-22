@@ -30,7 +30,6 @@
             <div v-if="index === items.length - 1">
               <div style="width: 40%; height:200px; display:inline-block; color: #e2e2e2;">
                 <el-button class="delete" icon="plus" @click="addForm"></el-button>
-
               </div>
             </div>
           </el-card>
