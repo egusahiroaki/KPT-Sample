@@ -7,8 +7,8 @@
           <el-card class="box-card">
             <el-form v-if="index < items.length - 1" :model="elm" label-width="60px">
               <el-form-item label="Member">
-                <el-select v-model="elm.name" placeholder="Select">
-                  <el-option v-for="member in people" :label="member.name" :value="member.name"></el-option>
+                <el-select v-model="elm.userId" placeholder="Select">
+                  <el-option v-for="member in people" :label="member.name" :value="member.id"></el-option>
                 </el-select>
               </el-form-item>
 
@@ -53,8 +53,8 @@ export default {
   data () {
     return {
       items: [
-        {name: '', type: '', title: ''},
-        {name: '', type: '', title: ''}
+        {userId: '', type: '', title: ''},
+        {userId: '', type: '', title: ''}
       ]
     }
   },
@@ -67,14 +67,14 @@ export default {
       this.$store.dispatch('add', {
         items: this.items
       })
-      this.items = [{name: '', type: '', title: ''}, {name: '', type: '', title: ''}]
+      this.items = [{userId: '', type: '', title: ''}, {userId: '', type: '', title: ''}]
       // })
     },
     addForm () {
-      this.items.push({name: '', type: '', title: ''})
+      this.items.push({user: '', type: '', title: ''})
 
       if (this.items.length === 1) {
-        this.items = [{name: '', type: '', title: ''}, {name: '', type: '', title: ''}]
+        this.items = [{userId: '', type: '', title: ''}, {userId: '', type: '', title: ''}]
       }
     },
     deleteItem (num) {

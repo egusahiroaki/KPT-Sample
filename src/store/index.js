@@ -59,11 +59,13 @@ const actions = {
 }
 
 const mutations = {
+  // items [{user: '', type: '', title: ''}, {user: '', type: '', title: ''}]
   [ADD_ITEMS] (state, { items }) {
     items.forEach((item) => {
+      console.log(item)
       state.dashboard.map(elm => {
         if (elm.title === item.type) {
-          elm.items.push({title: item.title, user: item.id})
+          elm.items.push({title: item.title, userId: item.userId})
         }
       })
     })
