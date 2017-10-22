@@ -4,10 +4,10 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  username: 'test user',
+  user: {id: 0, name: 'test user', edit: false},
   members: [
-    {id: 1, name: 'test userA'},
-    {id: 2, name: 'test userB'}
+    {id: 1, name: 'test userA', edit: false},
+    {id: 2, name: 'test userB', edit: false}
   ],
   dashboard: [
     {
@@ -34,22 +34,23 @@ const state = {
   ]
 }
 
-const ADD_MEMBERS = 'ADD_MEMBERS'
+const ADD_MEMBER = 'ADD_MEMBER'
 const DELETE_MEMBER = 'DELETE_MEMBER'
 
 const ADD_ITEMS = 'ADD_ITEMS'
 const DELETE_ITEM = 'DELETE_ITEM'
 
 const actions = {
+  // add item
   add: ({ commit }, { items }) => {
     commit(ADD_ITEMS, { items })
   },
   delete: ({ commit }, { label, item }) => {
     commit(DELETE_ITEM, { label, item })
   },
-
-  addMembers: ({ commit }, { members }) => {
-    commit(ADD_MEMBERS, { members })
+  // add member
+  addMember: ({ commit }, { member }) => {
+    commit(ADD_MEMBER, { member })
   },
 
   deleteMember: ({ commit }, { member }) => {
@@ -76,6 +77,19 @@ const mutations = {
       }
     })
     state.dashboard[i].items.splice(j, 1)
+  },
+  [ADD_MEMBER] (state, { member }) {
+    if (member.id === 0) {
+      this.state.user = member
+    }
+    // members
+    if (member.id !== 0) {
+      this.state.members.forEach((m) => {
+        if (m.id === member.id) {
+          m = member
+        }
+      })
+    }
   }
 }
 
@@ -83,8 +97,7 @@ const getters = {
   getDashboard: state => state.dashboard,
   getAllPeople: state => {
     let all = []
-    // me is id = 0
-    all.push({id: 0, name: state.username})
+    all.push(state.user)
     state.members.forEach((elm) => all.push(elm))
     return all
   }

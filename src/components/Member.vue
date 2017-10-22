@@ -2,23 +2,25 @@
   <div>
       <ul v-for='(elm, index) in people'>
         <li>
-          {{elm.name}}
-<!-- 
           <div v-if="!elm.edit" class="display" v-text="elm.name" @click="elm.edit = true"></div>
-          <input v-if="elm.edit" type="text" v-model="elm.name" ref="textInput" @keyup.enter="submit(elm)" />
- -->
+          <input  v-if="elm.edit" type="text" v-model="elm.name" @keyup.enter="submit(elm)" v-on:blur="elm.edit = false" ref="textInput" v-focus />
         </li>
       </ul>
-
-    <div>
-      <el-button @click="submit">Primary Button</el-button>
-    </div>
 
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+
+import Vue from 'vue'
+const focus = {
+  inserted (el) {
+    Vue.nextTick(function () {
+      el.focus()
+    })
+  }
+}
 
 export default {
   name: 'Member',
@@ -27,21 +29,19 @@ export default {
       members: [] // {id: 0, name: 'test user', edit: false},
     }
   },
-    // membersAddedEditState () {
-    //   console.log('aaa')
-    //   this.getAllPeople.forEach((member) => {
-    //     member.edit = false
-    //     this.members.push(member)
-    //   })
-    //   return this.members
-    // }
   computed: mapGetters({
     people: 'getAllPeople'
   }),
   methods: {
     submit (member) {
       member.edit = !member.edit
+      this.$store.dispatch('addMember', {
+        member: member
+      })
     }
+  },
+  directives: {
+    focus
   }
 }
 </script>
