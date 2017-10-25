@@ -1,10 +1,15 @@
 <template>
   <div>
       <ul v-for='(elm, index) in people'>
-        <li>
-          <div v-if="!elm.edit" class="display" v-text="elm.name" @click="elm.edit = true"></div>
-          <input  v-if="elm.edit" type="text" v-model="elm.name" @keyup.enter="edit(elm)" v-on:blur="elm.edit = false; isButtonDisabled = false" ref="textInput" v-focus @input='isButtonDisabled = true'/>
+        <li @mouseover='mouseOver($event)' @mouseleave='mouseLeave($event)'>
+          <div style="display: inline;" v-if="!elm.edit" class="display" v-text="elm.name" @click="elm.edit = true"></div>
+          <input style="display: inline;" v-if="elm.edit" type="text" v-model="elm.name" @keyup.enter="edit(elm)" v-on:blur="elm.edit = false; isButtonDisabled = false" ref="textInput" v-focus @input='isButtonDisabled = true'/>
+          <!-- delete button -->
+          <el-button class="delete" type="primary" icon="close" size="mini" @click="deleteItem(elm, item)"></el-button>
         </li>
+
+
+        <!-- editing form -->
         <li v-if="index === people.length - 1">
           <el-button :disabled="isButtonDisabled" size="mini" class="delete" icon="plus" @click="addMemberForm"></el-button>
         </li>
@@ -38,6 +43,18 @@ export default {
     lastUserId: 'getLastUserId'
   }),
   methods: {
+    mouseOver (event) {
+      const deleteObj = event.currentTarget.lastElementChild
+      if (deleteObj.style !== null) {
+        deleteObj.style.display = 'inline-block'
+      }
+    },
+    mouseLeave (event) {
+      const deleteObj = event.currentTarget.lastElementChild
+      if (deleteObj.style !== null) {
+        deleteObj.style.display = 'none'
+      }
+    },
     edit (member) {
       member.edit = !member.edit
 
@@ -70,6 +87,11 @@ export default {
 
 .el-col-12 {
   margin-bottom: 20px;
+}
+
+.delete {
+  display: none;
+  float: right;
 }
 
 </style>
