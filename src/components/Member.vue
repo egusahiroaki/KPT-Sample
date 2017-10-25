@@ -3,7 +3,7 @@
       <ul v-for='(elm, index) in people'>
         <li>
           <div v-if="!elm.edit" class="display" v-text="elm.name" @click="elm.edit = true"></div>
-          <input  v-if="elm.edit" type="text" v-model="elm.name" @keyup.enter="submit(elm)" v-on:blur="elm.edit = false; isButtonDisabled = false" ref="textInput" v-focus @input='isButtonDisabled = true'/>
+          <input  v-if="elm.edit" type="text" v-model="elm.name" @keyup.enter="edit(elm)" v-on:blur="elm.edit = false; isButtonDisabled = false" ref="textInput" v-focus @input='isButtonDisabled = true'/>
         </li>
         <li v-if="index === people.length - 1">
           <el-button :disabled="isButtonDisabled" size="mini" class="delete" icon="plus" @click="addMemberForm"></el-button>
@@ -37,14 +37,17 @@ export default {
     people: 'getAllPeople'
   }),
   methods: {
-    submit (member) {
+    edit (member) {
       member.edit = !member.edit
-      this.$store.dispatch('addMember', {
+      this.$store.dispatch('editMember', {
         member: member
       })
     },
     addMemberForm () {
-      this.people.push({id: 100, name: '', edit: true})
+      // add empty user
+      this.$store.dispatch('addMember', {
+        member: {id: 100, name: '', edit: true}
+      })
     }
   },
   directives: {

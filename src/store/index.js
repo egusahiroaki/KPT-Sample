@@ -35,6 +35,7 @@ const state = {
 }
 
 const ADD_MEMBER = 'ADD_MEMBER'
+const EDIT_MEMBER = 'EDIT_MEMBER'
 const DELETE_MEMBER = 'DELETE_MEMBER'
 
 const ADD_ITEMS = 'ADD_ITEMS'
@@ -51,6 +52,10 @@ const actions = {
   // add member
   addMember: ({ commit }, { member }) => {
     commit(ADD_MEMBER, { member })
+  },
+
+  editMember: ({ commit }, { member }) => {
+    commit(EDIT_MEMBER, { member })
   },
 
   deleteMember: ({ commit }, { member }) => {
@@ -80,6 +85,9 @@ const mutations = {
     state.dashboard[i].items.splice(j, 1)
   },
   [ADD_MEMBER] (state, { member }) {
+    this.state.members.push(member)
+  },
+  [EDIT_MEMBER] (state, { member }) {
     if (member.id === 0) {
       this.state.user = member
     }
