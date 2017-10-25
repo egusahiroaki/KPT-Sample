@@ -80,14 +80,9 @@ export default {
       // check whether this user has the item
       this.hasDashboardItem({ user: elm }).then(isExist => {
         console.log(isExist)
-        if (!isExist) {
-          // delete
-          console.log('delete')
-          this.$store.dispatch('deleteMember', {
-            member: elm
-          })
-        } else {
-          // alert
+        if (!isExist) { // delete
+          this.$store.dispatch('deleteMember', { member: elm })
+        } else { // alert
           alert('this user has item')
         }
       })
