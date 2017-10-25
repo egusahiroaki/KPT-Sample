@@ -62,6 +62,7 @@ export default {
   }),
   methods: {
     onSubmit () {
+      console.log(this.items)
       // this.$nextTick(() => {
       this.$store.dispatch('add', {
         items: this.items

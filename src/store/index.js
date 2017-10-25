@@ -9,6 +9,7 @@ const state = {
     {id: 1, name: 'test userA', edit: false},
     {id: 2, name: 'test userB', edit: false}
   ],
+  lastUserId: 2,
   dashboard: [
     {
       title: 'KEEP',
@@ -86,6 +87,7 @@ const mutations = {
   },
   [ADD_MEMBER] (state, { member }) {
     this.state.members.push(member)
+    this.state.lastUserId++
   },
   [EDIT_MEMBER] (state, { member }) {
     if (member.id === 0) {
@@ -148,6 +150,9 @@ const getters = {
     all.push(state.user)
     state.members.forEach((elm) => all.push(elm))
     return all
+  },
+  getLastUserId: state => {
+    return state.lastUserId
   }
 }
 

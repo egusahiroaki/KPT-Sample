@@ -34,7 +34,8 @@ export default {
     }
   },
   computed: mapGetters({
-    people: 'getAllPeople'
+    people: 'getAllPeople',
+    lastUserId: 'getLastUserId'
   }),
   methods: {
     edit (member) {
@@ -45,8 +46,9 @@ export default {
     },
     addMemberForm () {
       // add empty user
+      const nextUserId = this.lastUserId + 1
       this.$store.dispatch('addMember', {
-        member: {id: 100, name: '', edit: true}
+        member: {id: nextUserId, name: '', edit: true}
       })
     }
   },
