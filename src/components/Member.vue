@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 import Vue from 'vue'
 const focus = {
@@ -43,6 +43,9 @@ export default {
     lastUserId: 'getLastUserId'
   }),
   methods: {
+    ...mapActions({
+      hasDashboardItem: 'hasDashboardItem'
+    }),
     mouseOver (event) {
       const deleteObj = event.currentTarget.lastElementChild
       if (deleteObj.style !== null) {
@@ -74,8 +77,19 @@ export default {
       })
     },
     deleteMember (elm) {
-      this.$store.dispatch('deleteMember', {
-        member: elm
+      // check whether this user has the item
+      this.hasDashboardItem({ user: elm }).then(isExist => {
+        console.log(isExist)
+        if (!isExist) {
+          // delete
+          console.log('delete')
+          this.$store.dispatch('deleteMember', {
+            member: elm
+          })
+        } else {
+          // alert
+          alert('this user has item')
+        }
       })
     }
   },

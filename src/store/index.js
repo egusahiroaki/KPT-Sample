@@ -61,13 +61,17 @@ const actions = {
 
   deleteMember: ({ commit }, { member }) => {
     commit(DELETE_MEMBER, { member })
+  },
+  hasDashboardItem: ({ commit, state }, { user }) => {
+    return state.dashboard.some((elm) => {
+      return elm.items.some((item) => item.userId === user.id)
+    })
   }
 }
 
 const mutations = {
   [ADD_ITEMS] (state, { items }) {
     items.forEach((item) => {
-      console.log(item)
       state.dashboard.map(elm => {
         if (elm.title === item.type) {
           elm.items.push({title: item.title, userId: item.userId})
