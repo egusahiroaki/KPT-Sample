@@ -4,7 +4,7 @@
 
         <li @mouseover='mouseOver($event)' @mouseleave='mouseLeave($event)'>
           <div style="display: inline;" v-if="!elm.edit" class="display" v-text="elm.name" @click="elm.edit = true"></div>
-          <input style="display: inline;" v-if="elm.edit" type="text" v-model="elm.name" @keyup.enter="edit(elm)" v-on:blur="elm.edit = false; isButtonDisabled = false" ref="textInput" v-focus @input='isButtonDisabled = true'/>
+          <input style="display: inline;" v-if="elm.edit" type="text" v-model="elm.name" @keyup.enter="edit(elm)" @focus="isButtonDisabled = true" v-on:blur="elm.edit = false; isButtonDisabled = false" ref="textInput" v-focus @input='isButtonDisabled = true'/>
           <!-- delete button -->
           <el-button class="delete" type="primary" icon="close" size="mini" @click="deleteMember(elm)"></el-button>
         </li>
