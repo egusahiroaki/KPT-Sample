@@ -1,17 +1,17 @@
 <template>
   <div>
       <ul v-for='(elm, index) in people'>
+
         <li @mouseover='mouseOver($event)' @mouseleave='mouseLeave($event)'>
           <div style="display: inline;" v-if="!elm.edit" class="display" v-text="elm.name" @click="elm.edit = true"></div>
           <input style="display: inline;" v-if="elm.edit" type="text" v-model="elm.name" @keyup.enter="edit(elm)" v-on:blur="elm.edit = false; isButtonDisabled = false" ref="textInput" v-focus @input='isButtonDisabled = true'/>
           <!-- delete button -->
-          <el-button class="delete" type="primary" icon="close" size="mini" @click="deleteItem(elm, item)"></el-button>
+          <el-button class="delete" type="primary" icon="close" size="mini" @click="deleteMember(elm)"></el-button>
         </li>
-
 
         <!-- editing form -->
         <li v-if="index === people.length - 1">
-          <el-button :disabled="isButtonDisabled" size="mini" class="delete" icon="plus" @click="addMemberForm"></el-button>
+          <el-button :disabled="isButtonDisabled" size="mini" class="" icon="plus" @click="addMemberForm"></el-button>
         </li>
 
       </ul>
@@ -71,6 +71,11 @@ export default {
       const nextUserId = this.lastUserId + 1
       this.$store.dispatch('addMember', {
         member: {id: nextUserId, name: '', edit: true}
+      })
+    },
+    deleteMember (elm) {
+      this.$store.dispatch('deleteMember', {
+        member: elm
       })
     }
   },

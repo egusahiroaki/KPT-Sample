@@ -101,6 +101,11 @@ const mutations = {
         }
       })
     }
+  },
+  [DELETE_MEMBER] (state, { member }) {
+    // delete by id
+    const targetUserIndex = state.members.findIndex(elm => elm.id === member.id)
+    state.members.splice(targetUserIndex, 1)
   }
 }
 
