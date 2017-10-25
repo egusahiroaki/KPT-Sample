@@ -40,6 +40,11 @@ export default {
   methods: {
     edit (member) {
       member.edit = !member.edit
+
+      // if no name, create dummy name
+      if (member.name === '') {
+        member.name = 'dummy name'
+      }
       this.$store.dispatch('editMember', {
         member: member
       })
