@@ -8,9 +8,11 @@ import 'element-ui/lib/theme-default/index.css'
 import ElementUI from 'element-ui'
 import { sync } from 'vuex-router-sync'
 import store from './store'
-import { getInitialData } from './store/actions'
+// import { getInitialData } from './store/actions'
 
 Vue.config.productionTip = false
+// Vue.config.devtools = true
+
 Vue.use(ElementUI)
 
 sync(store, router)
@@ -20,8 +22,7 @@ new Vue({
   el: '#app',
   router,
   store,
-  template: '<App/>',
-  components: { App }
+  render: h => h(App)
 })
 
-getInitialData(store)
+// getInitialData(store)
