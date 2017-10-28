@@ -43,7 +43,7 @@ export default {
       }
     },
     deleteItem (label, item) {
-      this.$store.dispatch('delete', { label, item })
+      this.$store.dispatch('deleteItem', { label, item })
     }
   }
 }

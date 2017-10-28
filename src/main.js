@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-default/index.css'
 import ElementUI from 'element-ui'
 import { sync } from 'vuex-router-sync'
 import store from './store'
+import { getInitialData } from './store/actions'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
@@ -22,3 +23,5 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+getInitialData(store)

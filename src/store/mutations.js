@@ -1,7 +1,9 @@
 import * as types from './mutation-types'
 
 export default {
-
+  [types.RECEIVE_ALL] (state, { data }) {
+    state = data
+  },
   [types.ADD_ITEMS] (state, { items }) {
     items.forEach((item) => {
       state.dashboard.map(elm => {

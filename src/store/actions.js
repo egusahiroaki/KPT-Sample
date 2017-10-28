@@ -1,4 +1,11 @@
 import * as types from './mutation-types'
+import * as api from '../api/mock-data'
+
+export const getInit = ({commit}) => {
+  api.get(d => {
+    commit(types.RECEIVE_ALL, { d })
+  })
+}
 
 // add item
 export const add = ({ commit }, { items }) => {

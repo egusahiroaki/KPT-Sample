@@ -1,3 +1,4 @@
+export const RECEIVE_ALL = 'RECEIVE_ALL'
 export const ADD_MEMBER = 'ADD_MEMBER'
 export const EDIT_MEMBER = 'EDIT_MEMBER'
 export const DELETE_MEMBER = 'DELETE_MEMBER'
