@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as getters from './getters'
+import * as actions from './actions'
+import * as mutations from './mutations'
 
 Vue.use(Vuex)
 
@@ -33,136 +36,6 @@ const state = {
       ]
     }
   ]
-}
-
-const ADD_MEMBER = 'ADD_MEMBER'
-const EDIT_MEMBER = 'EDIT_MEMBER'
-const DELETE_MEMBER = 'DELETE_MEMBER'
-
-const ADD_ITEMS = 'ADD_ITEMS'
-const DELETE_ITEM = 'DELETE_ITEM'
-
-const actions = {
-  // add item
-  add: ({ commit }, { items }) => {
-    commit(ADD_ITEMS, { items })
-  },
-  delete: ({ commit }, { label, item }) => {
-    commit(DELETE_ITEM, { label, item })
-  },
-  // add member
-  addMember: ({ commit }, { member }) => {
-    commit(ADD_MEMBER, { member })
-  },
-
-  editMember: ({ commit }, { member }) => {
-    commit(EDIT_MEMBER, { member })
-  },
-
-  deleteMember: ({ commit }, { member }) => {
-    commit(DELETE_MEMBER, { member })
-  },
-  hasDashboardItem: ({ commit, state }, { user }) => {
-    return state.dashboard.some((elm) => {
-      return elm.items.some((item) => item.userId === user.id)
-    })
-  }
-}
-
-const mutations = {
-  [ADD_ITEMS] (state, { items }) {
-    items.forEach((item) => {
-      state.dashboard.map(elm => {
-        if (elm.title === item.type) {
-          elm.items.push({title: item.title, userId: item.userId})
-        }
-      })
-    })
-  },
-  [DELETE_ITEM] (state, { label, item }) {
-    let i, j
-    state.dashboard.forEach((elm, index) => {
-      if (elm.title === label.title) {
-        i = index
-        j = elm.items.findIndex(e => e.title === item.title)
-      }
-    })
-    state.dashboard[i].items.splice(j, 1)
-  },
-  [ADD_MEMBER] (state, { member }) {
-    this.state.members.push(member)
-    this.state.lastUserId++
-  },
-  [EDIT_MEMBER] (state, { member }) {
-    if (member.id === 0) {
-      this.state.user = member
-    }
-    // members
-    if (member.id !== 0) {
-      this.state.members.forEach((m) => {
-        if (m.id === member.id) {
-          m = member
-        }
-      })
-    }
-  },
-  [DELETE_MEMBER] (state, { member }) {
-    // delete by id
-    const targetUserIndex = state.members.findIndex(elm => elm.id === member.id)
-    state.members.splice(targetUserIndex, 1)
-  }
-}
-
-const getters = {
-  getDashboard: state => {
-    const keepBoardItems = state.dashboard[0].items.map((item) => {
-      if (item.userId === 0) {
-        item.user = state.user
-      }
-
-      if (item.userId !== 0) {
-        item.user = state.members.find(member => item.userId === member.id)
-      }
-      return item
-    })
-
-    const problemBoardItems = state.dashboard[1].items.map((item) => {
-      if (item.userId === 0) {
-        item.user = state.user
-      }
-
-      if (item.userId !== 0) {
-        item.user = state.members.find(member => item.userId === member.id)
-      }
-      return item
-    })
-
-    const tryBoardItems = state.dashboard[2].items.map((item) => {
-      if (item.userId === 0) {
-        item.user = state.user
-      }
-
-      if (item.userId !== 0) {
-        item.user = state.members.find(member => item.userId === member.id)
-      }
-      return item
-    })
-
-    let dashboardReplacedByUser = []
-    dashboardReplacedByUser.push({title: 'KEEP', items: keepBoardItems})
-    dashboardReplacedByUser.push({title: 'PROBLEM', items: problemBoardItems})
-    dashboardReplacedByUser.push({title: 'TRY', items: tryBoardItems})
-    return dashboardReplacedByUser
-  },
-  getAllPeople: state => {
-    let all = []
-    all.push(state.user)
-    state.members.forEach((elm) => all.push(elm))
-    return all
-  },
-  getLastUserId: state => {
-    return state.lastUserId
-  }
 }
 
 export default new Vuex.Store({
