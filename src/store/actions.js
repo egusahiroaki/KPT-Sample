@@ -1,7 +1,7 @@
 import * as types from './mutation-types'
 import * as api from '../api/mock-data'
 
-export const getInit = ({commit}) => {
+export const getInitialData = ({commit}) => {
   api.get(d => {
     commit(types.RECEIVE_ALL, { d })
   })
