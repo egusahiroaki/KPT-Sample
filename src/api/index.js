@@ -10,9 +10,7 @@ export const getInitialState = (cb) => {
         cb(response.data)
       })
       .catch(e => {
-        console.log('getInitialData')
         console.log(e)
-        console.log(data)
         cb(data)
       })
   }, LATENCY)
