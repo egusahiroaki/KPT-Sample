@@ -38,8 +38,8 @@ export default {
       isButtonDisabled: false
     }
   },
+  props: ['allMembers'],
   computed: mapGetters({
-    allMembers: 'getAllPeople',
     lastUserId: 'getLastUserId'
   }),
   methods: {

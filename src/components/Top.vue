@@ -18,17 +18,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   name: 'Top',
   data () {
     return {
     }
   },
-  computed: mapGetters({
-    allItems: 'getDashboard'
-  }),
+  props: ['allItems'],
   methods: {
     mouseOver (event) {
       const deleteObj = event.currentTarget.lastElementChild
