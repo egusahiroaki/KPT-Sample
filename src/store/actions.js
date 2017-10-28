@@ -1,8 +1,9 @@
 import * as types from './mutation-types'
-import * as api from '../api/mock-data'
+import * as api from '../api'
 
 export const getInitialData = ({commit}) => {
-  api.get(d => {
+  console.log('sasdfas')
+  api.getInitialState(d => {
     commit(types.RECEIVE_ALL, { d })
   })
 }
