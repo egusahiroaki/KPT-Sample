@@ -1,20 +1,18 @@
 <template>
-  <div v-if="$store.getters.initailState">
-    <el-tabs type="card">
-      <el-tab-pane label="Top">
-        <top :allItems="allItems"></top>
-      </el-tab-pane>
-      <el-tab-pane label="Write">
-        <write></write>
-      </el-tab-pane>
-      <el-tab-pane label="Member">
-        <member :allMembers="allMembers"></member>
-      </el-tab-pane>
-      <el-tab-pane label="Markdown">
-        <markdown></markdown>
-      </el-tab-pane>
-    </el-tabs>
-  </div>
+  <el-tabs type="card">
+    <el-tab-pane label="Top">
+      <top :allItems="allItems"></top>
+    </el-tab-pane>
+    <el-tab-pane label="Write">
+      <write></write>
+    </el-tab-pane>
+    <el-tab-pane label="Member">
+      <member :allMembers="allMembers"></member>
+    </el-tab-pane>
+    <el-tab-pane label="Markdown">
+      <markdown></markdown>
+    </el-tab-pane>
+  </el-tabs>
 </template>
 
 <script>
