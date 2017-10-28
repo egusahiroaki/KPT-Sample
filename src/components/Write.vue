@@ -1,14 +1,14 @@
 <template>
   <div>
     <el-row :gutter="20" class='wrapper'>
-      <div v-for='(elm, index) in items'>
+      <div v-for='(elm, index) in items' :key="elm">
 
         <el-col :span="12">
           <el-card class="box-card">
             <el-form v-if="index < items.length - 1" :model="elm" label-width="60px">
               <el-form-item label="Member">
                 <el-select v-model="elm.userId" placeholder="Select">
-                  <el-option v-for="member in people" :label="member.name" :value="member.id"></el-option>
+                  <el-option v-for="member in people" :key="member" :label="member.name" :value="member.id"></el-option>
                 </el-select>
               </el-form-item>
 

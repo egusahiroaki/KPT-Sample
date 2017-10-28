@@ -1,10 +1,10 @@
 <template>
   <div>
-    <el-card class="box-card" v-for='elm in allItems'>
+    <el-card class="box-card" v-for='elm in allItems' :key="elm">
       <div slot="header" class="clearfix">
         <h2 style="line-height: 16px;">{{elm.title}}</h2>
       </div>
-      <div v-for='item in elm.items' class="text row">
+      <div v-for='item in elm.items' class="text row" :key="item">
         <div class="content" @mouseover='mouseOver($event)' @mouseleave='mouseLeave($event)'>
           <div class="item">
             <el-tag type="gray">{{item.user.name}}</el-tag>

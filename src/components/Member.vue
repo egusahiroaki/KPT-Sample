@@ -1,6 +1,6 @@
 <template>
   <div>
-      <ul v-for='(elm, index) in allMembers'>
+      <ul v-for='(elm, index) in allMembers' :key="elm">
 
         <li @mouseover='mouseOver($event)' @mouseleave='mouseLeave($event)'>
           <div style="display: inline;" v-if="!elm.edit" class="display" v-text="elm.name" @click="elm.edit = true"></div>
