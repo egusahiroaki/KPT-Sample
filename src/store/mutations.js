@@ -2,7 +2,23 @@ import * as types from './mutation-types'
 
 export default {
   [types.RECEIVE_ALL] (state, { data }) {
-    state = data
+    data.members.forEach(member => {
+      state.members.push(member)
+    })
+
+    state.lastUserId = data.lastUserId
+
+    data.dashboard.forEach(elm => {
+      if (elm.title === 'KEEP') {
+        elm.items.forEach(item => state.dashboard[0].items.push(item))
+      }
+      if (elm.title === 'PROBLEM') {
+        elm.items.forEach(item => state.dashboard[1].items.push(item))
+      }
+      if (elm.title === 'TRY') {
+        elm.items.forEach(item => state.dashboard[2].items.push(item))
+      }
+    })
   },
 
   [types.ADD_ITEMS] (state, { items }) {
