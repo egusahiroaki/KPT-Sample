@@ -1,6 +1,6 @@
 <template>
   <div>
-      <ul v-for='(elm, index) in people'>
+      <ul v-for='(elm, index) in allMembers'>
 
         <li @mouseover='mouseOver($event)' @mouseleave='mouseLeave($event)'>
           <div style="display: inline;" v-if="!elm.edit" class="display" v-text="elm.name" @click="elm.edit = true"></div>
@@ -10,7 +10,7 @@
         </li>
 
         <!-- editing form -->
-        <li v-if="index === people.length - 1">
+        <li v-if="index === allMembers.length - 1">
           <el-button :disabled="isButtonDisabled" size="mini" class="" icon="plus" @click="addMemberForm"></el-button>
         </li>
 
@@ -39,7 +39,7 @@ export default {
     }
   },
   computed: mapGetters({
-    people: 'getAllPeople',
+    allMembers: 'getAllallMembers',
     lastUserId: 'getLastUserId'
   }),
   methods: {
