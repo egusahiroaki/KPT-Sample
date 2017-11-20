@@ -5,7 +5,7 @@
         <div 
           v-draggable 
           class="item" 
-          v-bind:style="{ top: (j+1) * 50 + 'px', left: i * 150 + 'px' }"
+          v-bind:style="{ background: colorize(elm.title),top: (j+1) * 50 + 'px', left: i * 150 + 'px' }"
         >
           {{item.title}}
         </div>
@@ -29,6 +29,19 @@ export default {
   },
   props: ['allItems'],
   methods: {
+    colorize (title) {
+      if (title === 'KEEP') {
+        return 'yellow'
+      }
+
+      if (title === 'PROBLEM') {
+        return 'orange'
+      }
+
+      if (title === 'TRY') {
+        return 'green'
+      }
+    }
   }
 }
 </script>
@@ -45,7 +58,7 @@ export default {
     width: 100%;
   }
   .item {
-    background: cadetblue;
+    /* background: cadetblue; */
     width: 100px;
     height: 50px;
   }
