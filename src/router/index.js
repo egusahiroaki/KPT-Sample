@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Canvas from '@/components/Canvas'
 import Top from '@/components/Top'
 import Write from '@/components/Write'
 import Member from '@/components/Member'
@@ -10,6 +11,11 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/',
+      name: 'canvas',
+      component: Canvas
+    },
     {
       path: '/',
       name: 'top',
