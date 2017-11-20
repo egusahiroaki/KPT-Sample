@@ -1,7 +1,7 @@
 <template>
 
 <!-- v-bind:style="{ background: colorize(elm.title), top: setStickerPositionX (j+1) + 'px', left: i * 150 + 'px' }" -->
-  <div style="height:600px; position:relative;">
+  <div style="height: 600px; position:relative;">
     <div class="k-bk" >KEEP</div>
     <div class="t-bk" >TRY</div>
     <div class="p-bk" >PROBLEM</div>
@@ -19,20 +19,20 @@
         </div>
       </div>
     </div>
-
-  <!-- <div id="app" style="position: relative;">
-    <div v-draggable style="background: cadetblue; width: 200px; height: 200px;">div1</div>
-    <div v-draggable style="background: pink; left: 220px; width: 200px; height: 200px;">div2</div>
-  </div> -->
-
   </div>
 </template>
 
 <script>
+
+const CENTER_X = window.innerWidth / 2
+const HEIGHT = 600
+const CENTER_Y = HEIGHT / 2
+
 export default {
   name: 'TaskCanvas',
   data () {
     return {
+      height: HEIGHT,
       isDragging: false
     }
   },
@@ -48,11 +48,11 @@ export default {
       }
 
       if (title === 'PROBLEM') {
-        return { background: color, top: window.innerHeight / 2 + (j + 1) * 50 + 'px', left: i + 'px' }
+        return { background: color, top: CENTER_Y + (j + 1) * 50 + 'px', left: i + 'px' }
       }
 
       if (title === 'TRY') {
-        return { background: color, top: (j + 1) * 50 + 'px', left: window.innerWidth / 2 + i + 'px' }
+        return { background: color, top: (j + 1) * 50 + 'px', left: CENTER_X + i + 'px' }
       }
     },
     finish () {
@@ -61,7 +61,20 @@ export default {
     move (e) {
       if (this.isDragging) {
         // console.log(e)
+        // pageYの境界は 140（title + tabのheight） + 600 / 2である
         console.log('e.layerX: ' + e.pageX + ', e.layerY: ' + e.pageY)
+        // 取り出して削除する。
+        if (e.pageX < CENTER_X && e.pageY < 140 + HEIGHT) {
+          console.log('KEEP')
+        }
+
+        if (e.pageX < CENTER_X && e.pageY >= 140 + HEIGHT) {
+          console.log('PROBLEM')
+        }
+
+        if (e.pageX >= CENTER_X) {
+          console.log('TRY')
+        }
       }
     },
     colorize (title) { // 背景色
