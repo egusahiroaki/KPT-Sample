@@ -1,11 +1,19 @@
 <template>
-  <div style="height:800px;">
+
+<!-- v-bind:style="{ background: colorize(elm.title), top: setStickerPositionX (j+1) + 'px', left: i * 150 + 'px' }" -->
+  <div style="height:600px; position:relative;">
+    <div class="k-bk" >KEEP</div>
+    <div class="t-bk" >TRY</div>
+    <div class="p-bk" >PROBLEM</div>
     <div v-for='(elm, i) in allItems' :key="elm.title">
       <div v-for='(item, j) in elm.items' :key="item.createdAt">
         <div 
           v-draggable 
           class="item" 
-          v-bind:style="{ background: colorize(elm.title),top: (j+1) * 50 + 'px', left: i * 150 + 'px' }"
+          v-bind:style="setStickerPosition(elm.title,i,j)"
+          @mousedown="drag()"
+          @mousemove="move($event)"
+          @mouseup="finish()"
         >
           {{item.title}}
         </div>
@@ -25,11 +33,38 @@ export default {
   name: 'TaskCanvas',
   data () {
     return {
+      isDragging: false
     }
   },
   props: ['allItems'],
   methods: {
-    colorize (title) {
+    drag () {
+      this.isDragging = true
+    },
+    setStickerPosition (title, i, j) { // iは大項目, jはそこに所属する小項目
+      const color = this.colorize(title)
+      if (title === 'KEEP') {
+        return { background: color, top: (j + 1) * 50 + 'px', left: i * 150 + 'px' }
+      }
+
+      if (title === 'PROBLEM') {
+        return { background: color, top: window.innerHeight / 2 + (j + 1) * 50 + 'px', left: i + 'px' }
+      }
+
+      if (title === 'TRY') {
+        return { background: color, top: (j + 1) * 50 + 'px', left: window.innerWidth / 2 + i + 'px' }
+      }
+    },
+    finish () {
+      this.isDragging = false
+    },
+    move (e) {
+      if (this.isDragging) {
+        // console.log(e)
+        console.log('e.layerX: ' + e.pageX + ', e.layerY: ' + e.pageY)
+      }
+    },
+    colorize (title) { // 背景色
       if (title === 'KEEP') {
         return 'yellow'
       }
@@ -57,6 +92,38 @@ export default {
   .content {
     width: 100%;
   }
+  .k-bk {
+    background:#dae497;
+    width: 50%;
+    height: 50%;
+    float: left;
+    color:white;
+    font-weight: bold;
+    font-size: 30px;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+  }
+  .p-bk {
+    background:#e4c397;
+    width: 50%;
+    height: 50%;
+    float: left;
+    color:white;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  .t-bk {
+    background:#e497b9;
+    width: 50%;
+    height: 100%;
+    float: right;
+    color:white;
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+
   .item {
     /* background: cadetblue; */
     width: 100px;
