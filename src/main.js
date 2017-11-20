@@ -9,12 +9,13 @@ import ElementUI from 'element-ui'
 // import { sync } from 'vuex-router-sync'
 import store from './store'
 import { getInitialData } from './store/actions'
+import VueUIDraggable from './draggable'
 
 Vue.config.productionTip = false
 // Vue.config.devtools = true
 
 Vue.use(ElementUI)
-
+Vue.use(VueUIDraggable)
 // sync(store, router)
 
 /* eslint-disable no-new */
