@@ -63,12 +63,13 @@ export default {
         // console.log(e)
         // pageYの境界は 140（title + tabのheight） + 600 / 2である
         console.log('e.layerX: ' + e.pageX + ', e.layerY: ' + e.pageY)
+        console.log(140 + CENTER_Y)
         // 取り出して削除する。
-        if (e.pageX < CENTER_X && e.pageY < 140 + HEIGHT) {
+        if (e.pageX < CENTER_X && e.pageY < 140 + CENTER_Y) {
           console.log('KEEP')
         }
 
-        if (e.pageX < CENTER_X && e.pageY >= 140 + HEIGHT) {
+        if (e.pageX < CENTER_X && e.pageY >= 140 + CENTER_Y) {
           console.log('PROBLEM')
         }
 
