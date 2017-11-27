@@ -8,7 +8,11 @@ export const getInitialData = ({commit}) => {
 }
 
 // add item
-export const addItem = ({ commit }, { items }) => {
+export const addItem = ({ commit }, { item }) => {
+  commit(types.ADD_ITEM, { item })
+}
+
+export const addItems = ({ commit }, { items }) => {
   commit(types.ADD_ITEMS, { items })
 }
 

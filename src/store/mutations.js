@@ -21,8 +21,29 @@ export default {
     })
   },
 
+  [types.ADD_ITEM] (state, { item }) {
+    // state.dashboard.map(elm => {
+    //   if (elm.title === item.type) { // keep, problem, tryとiterationを回し、一致するものを移動させている。
+    //     elm.items.push({title: item.title, userId: item.userId})
+    //   }
+    // })
+    console.log('[ADD_ITEM] item')
+    console.log(item)
+    if (item.type === 'KEEP') {
+      state.dashboard[0].items.push({title: item.title, userId: item.userId})
+    }
+    if (item.type === 'PROBLEM') {
+      state.dashboard[1].items.push({title: item.title, userId: item.userId})
+    }
+    if (item.type === 'TRY') {
+      state.dashboard[2].items.push({title: item.title, userId: item.userId})
+    }
+  },
+
   [types.ADD_ITEMS] (state, { items }) {
     items.forEach((item) => {
+      console.log('[ADD_ITEMS] item')
+      console.log(item)
       state.dashboard.map(elm => {
         if (elm.title === item.type) {
           elm.items.push({title: item.title, userId: item.userId})
@@ -34,6 +55,8 @@ export default {
   [types.DELETE_ITEM] (state, { label, item }) {
     let i, j
     state.dashboard.forEach((elm, index) => {
+      console.log('[DELETE_ITEM] label.title')
+      console.log(elm.title)
       if (elm.title === label.title) {
         i = index
         j = elm.items.findIndex(e => e.title === item.title)

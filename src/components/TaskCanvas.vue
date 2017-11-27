@@ -12,9 +12,10 @@
           class="item" 
           v-bind:style="setStickerPosition(elm.title,i,j)"
           @mousedown="drag()"
-          @mousemove="move($event)"
+          @mousemove="move($event, elm.title, item)"
           @mouseup="finish()"
         >
+          {{elm.title}}
           {{item.title}}
         </div>
       </div>
@@ -58,23 +59,38 @@ export default {
     finish () {
       this.isDragging = false
     },
-    move (e) {
+    move (e, currentLabel, currentItem) {
+      console.log('movemove')
       if (this.isDragging) {
         // console.log(e)
         // pageYの境界は 140（title + tabのheight） + 600 / 2である
-        console.log('e.layerX: ' + e.pageX + ', e.layerY: ' + e.pageY)
-        console.log(140 + CENTER_Y)
+        // console.log('e.layerX: ' + e.pageX + ', e.layerY: ' + e.pageY)
+
         // 取り出して削除する。
-        if (e.pageX < CENTER_X && e.pageY < 140 + CENTER_Y) {
-          console.log('KEEP')
+        if (e.pageX < CENTER_X && e.pageY < 140 + CENTER_Y && currentLabel !== 'KEEP') {
+          // console.log('KEEP')
+          const label = { title: currentLabel }
+          const item = currentItem
+          this.$store.dispatch('deleteItem', { label, item })
+          this.$store.dispatch('addItem', { item: {userId: currentItem.userId, type: 'KEEP', title: currentItem.title} })
+          // this.items = [{userId: '', type: '', title: ''}, {userId: '', type: '', title: ''}]
         }
 
-        if (e.pageX < CENTER_X && e.pageY >= 140 + CENTER_Y) {
-          console.log('PROBLEM')
+        if (e.pageX < CENTER_X && e.pageY >= 140 + CENTER_Y && currentLabel !== 'PROBLEM') {
+          // console.log('PROBLEM')
+          const label = { title: currentLabel }
+          const item = currentItem
+          this.$store.dispatch('deleteItem', { label, item })
+          console.log({ item: {userId: currentItem.userId, type: 'PROBLEM', title: currentItem.title} })
+          this.$store.dispatch('addItem', { item: {userId: currentItem.userId, type: 'PROBLEM', title: currentItem.title} })
         }
 
-        if (e.pageX >= CENTER_X) {
-          console.log('TRY')
+        if (e.pageX >= CENTER_X && currentLabel !== 'TRY') {
+          // console.log('TRY')
+          const label = { title: currentLabel }
+          const item = currentItem
+          this.$store.dispatch('deleteItem', { label, item })
+          this.$store.dispatch('addItem', { item: {userId: currentItem.userId, type: 'TRY', title: currentItem.title} })
         }
       }
     },

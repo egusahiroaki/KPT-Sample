@@ -39,6 +39,8 @@ export default {
       }
     },
     deleteItem (label, item) {
+      console.log('deleteItem')
+      console.log(label)
       this.$store.dispatch('deleteItem', { label, item })
     }
   }
