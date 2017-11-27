@@ -64,7 +64,7 @@ export default {
     onSubmit () {
       console.log(this.items)
       // this.$nextTick(() => {
-      this.$store.dispatch('add', {
+      this.$store.dispatch('addItem', {
         items: this.items
       })
       this.items = [{userId: '', type: '', title: ''}, {userId: '', type: '', title: ''}]
